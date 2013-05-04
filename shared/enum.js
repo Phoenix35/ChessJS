@@ -11,16 +11,13 @@ var Enums = {
         WHITE:  1 << 1
     },
 
-    Settings: {
-        maxrooms: 200 // Max. number of rooms
-    },
-
     Errors: {
         ERR_MAX_ROOMS_REACHED:      0x0001,
     },
 
     Opcodes: {
-        CMSG_ROOM_TALK:                     0x0001,
+        SMSG_HELLO:                     0x0001,
+        CMSG_START_HANDSHAKE:           0x0002,
     },
 
     GameResults: {

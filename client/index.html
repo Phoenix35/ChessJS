@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+
+<body>
+    <div id="renderingContainer"></div>
+    <script src="./js/libs/jquery-1.9.1.min.js"></script>
+    <script src="http://127.0.0.1/socket.io/socket.io.js"></script>
+    <!-- Game scripts -->
+    <script src="../shared/class.js"></script>
+    <script src="../shared/enum.js"></script>
+    <script src="../shared/OpcodeHandler.js"></script>
+    <script src="../shared/HandlerManager.js"></script><!-- Creates an instance of HandlerManager -->
+    <script src="./js/network.js"></script>
+    <script src="./js/game.js"></script>
+    <script src="./js/renderer.js"></script>
+    <!-- Opcode handlers -->
+    <script src="./js/MiscHandlers.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        if (typeof(io) === "undefined")
+            return console.debug("[ERROR] Socket.IO could not be loaded.");
+    
+        var ChessGame = new window.Game(document.getElementById("renderingContainer"));
+        ChessGame.Connect("localhost", 80);
+    });
+    </script>
+</body>
+</html>

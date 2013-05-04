@@ -1,5 +1,10 @@
-var Class = require("class.js").Class,
-    OpcodeHandler = Class.extend({
+var ClassInstance = null;
+if (typeof(require) !== "undefined")
+    ClassInstance = Class;
+else
+    ClassInstance = window.Class;
+
+OpcodeHandler = ClassInstance.extend({
     init: function(opcodeId, handle) {
         this.opcodeId = opcodeId;
         if (typeof(handle) === "function")
@@ -12,8 +17,8 @@ var Class = require("class.js").Class,
     set Handler() { },
     set Opcode() { },
     
-    handlerFunction: function() { console.log("Unknown handler for opcode " + this.opcodeId); },  // The actual handler
-    opcodeId: 0,                     // Opcode ID
+    // handlerFunction: function() { console.log("Unknown handler for opcode " + this.opcodeId); },  // The actual handler
+    // opcodeId: 0,                     // Opcode ID
 });
 
 Object.defineProperty(OpcodeHandler, "handlerFunction", {
@@ -30,4 +35,7 @@ Object.defineProperty(OpcodeHandler, "opcodeId", {
     configurable: true
 });
 
-module.exports = OpcodeHandler;
+if (typeof(exports) === "undefined")
+    window.OpcodeHandler = OpcodeHandler;
+else
+    module.exports = OpcodeHandler;

@@ -1,15 +1,27 @@
-var Class = require("class.js").Class,
-    OpcodeHandler = require("opcodeHandler.js");
+var OpcodeHandler = null;
+var ClassInstance = null;
+if (typeof(require) !== "undefined") {
+    OpcodeHandler = require("./OpcodeHandler.js");
+    ClassInstance = Class;
+} else {
+    OpcodeHandler = window.OpcodeHandler;
+    ClassInstance = window.Class;
+}   
 
-module.exports = HandlerManager = Class.extend({
+var HandlerManager = ClassInstance.extend({
     init: function() { },
     
-    handlers: { },
+    handlers: [],
     
     AddHandler: function(opcode, handler) {
         if (handler instanceof OpcodeHandler)
-            this.handlers[] = handler;
+            this.handlers.push(handler);
     },
     
-    GetHandlers: function() { return this.handlers; }
+    GetHandlers: function() { return this.handlers; },
 });
+
+if (typeof(exports) === "undefined")
+    window.HandlerManager = new HandlerManager();
+else
+    module.exports = HandlerManager;
